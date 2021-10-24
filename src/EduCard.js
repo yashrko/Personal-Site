@@ -10,7 +10,6 @@ export default function EduCard({
   urlimg,
   index,
 }) {
-  console.log(active)
   return (
     <div className={active ? 'carousel-item active' : 'carousel-item'}>
       <img
@@ -19,7 +18,7 @@ export default function EduCard({
         height='600vw'
         alt={college}
       />
-      <div class='carousel-caption d-md-block'>
+      <div className='carousel-caption d-md-block'>
         <h4>{course + '  ' + percent} </h4>
         <h5>{branch + ' ' + year}</h5>
         <p>{college}</p>

@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(245, 229, 250);
+  --flip-animation-time: 0.7s;
+  --load-wait: 2s;
 }
 
 code {
@@ -83,20 +85,22 @@ code {
 }
 .hackload {
   animation-name: hackloadanimate;
-  animation-duration: 5s;
+  animation-duration: var(--load-wait);
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 @keyframes hackloadanimate {
   0% {
+    z-index: 3;
     opacity: 1;
     transform: translateX(-120%) translateY(20%) scale(0.3, 0.3);
   }
   65% {
-    opacity: 1;
+    opacity: 3;
     transform: translateX(-120%) translateY(20%) scale(0.3, 0.3);
   }
   100% {
+    z-index: 2;
   }
 }
 .blur {
@@ -105,18 +109,18 @@ code {
   width: 100%;
   background: rgba(0, 0, 0, 1);
   z-index: 1;
-  animation: bodyblur 5s 1;
+  animation: bodyblur var(--load-wait) 1;
   animation-fill-mode: forwards;
 }
 @keyframes bodyblur {
   0% {
     opacity: 1;
-    z-index: 1;
+    z-index: 2;
     filter: blur(1px);
   }
   65% {
     opacity: 1;
-    z-index: 1;
+    z-index: 2;
     filter: blur(1px);
   }
   100% {
@@ -147,6 +151,15 @@ code {
   }
   .hackwatch {
     display: none;
+  }
+}
+@media screen and (max-width: 900px) {
+  .card-container {
+    width: 100%;
+    margin: 4% 0% !important;
+  }
+  .shadow {
+    display: none !important;
   }
 }
 .eye1 {
@@ -209,6 +222,9 @@ code {
   .sidebarspan {
     margin-left: 43%;
   }
+  .mar-right {
+    margin-right: 2%;
+  }
 }
 @media screen and (min-width: 750px) {
   .sidebar {
@@ -218,4 +234,351 @@ code {
 
 .card:hover {
   box-shadow: -5px -5px 6px #777;
+}
+.navbar-outer {
+  position: absolute;
+  margin-top: 1%;
+  margin-left: 5%;
+  background-color: transparent;
+  z-index: 1;
+}
+.navbar {
+  background-color: transparent !important;
+}
+.navbar-nav > .nav-item > .nav-link {
+  color: rgb(255, 255, 255);
+  margin-left: 5%;
+}
+
+.navbar-nav > .nav-item > .nav-link:hover {
+  color: rgb(100, 43, 43);
+}
+.navbar-nav > .nav-item {
+  margin-left: 40%;
+}
+.navbar-nav {
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.navbar > .container-fluid {
+  flex-wrap: nowrap;
+}
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.card-container {
+  transform-style: preserve-3d;
+  perspective: 70rem;
+  perspective-origin: top;
+  height: 100%;
+  margin: 2% 0%;
+}
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  transform-style: preserve-3d;
+  transition-duration: var(--flip-animation-time);
+}
+
+.front-card {
+  position: absolute;
+  border-radius: 5%;
+  width: 100%;
+  height: 100%;
+  animation: reversebackflip var(--flip-animation-time) linear;
+}
+.flip-card:hover .front-card {
+  transform-style: preserve-3d;
+  animation: frontflip var(--flip-animation-time) linear;
+  animation-fill-mode: forwards;
+}
+
+.back-card {
+  position: absolute;
+  opacity: 0;
+  border-radius: 5%;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(-180deg);
+  animation: reversefrontflip var(--flip-animation-time) linear;
+}
+.flip-card:hover .back-card {
+  display: block;
+  transform-style: preserve-3d;
+  animation: backflip var(--flip-animation-time) linear;
+  animation-fill-mode: forwards;
+}
+@keyframes frontflip {
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(180deg);
+  }
+}
+@keyframes backflip {
+  49% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+@keyframes reversefrontflip {
+  49% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+@keyframes reversebackflip {
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(-180deg);
+  }
+}
+.carousel-item {
+  transition: unset;
+}
+.rotatecardX {
+  /* transition-duration: var(--flip-animation-time); */
+  transform: rotateX(180deg);
+  transition: transform calc(var(--flip-animation-time));
+}
+.rotatecardZ {
+  transition-duration: calc(var(--flip-animation-time));
+  transform: rotateZ(180deg);
+}
+.flip-card ~ .shadow {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  width: 60%;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 50%;
+  animation: cardshadow2 var(--flip-animation-time) linear;
+}
+.flip-card:hover ~ .shadow {
+  width: 10%;
+  background: rgba(0, 0, 0, 0.6);
+  animation: cardshadow var(--flip-animation-time) linear;
+  animation-fill-mode: forwards;
+}
+@keyframes cardshadow {
+  0% {
+    width: 60%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    width: 0%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  100% {
+    width: 60%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+@keyframes cardshadow2 {
+  0% {
+    width: 60%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    width: 0%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  100% {
+    width: 60%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+.night {
+  width: 100%;
+  height: 45.1rem;
+  background: rgba(0, 0, 0, 1);
+  perspective: 20rem;
+  overflow: hidden;
+}
+.bigStar {
+  border-radius: 50%;
+  height: 3px;
+  width: 3px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1);
+  top: 20px;
+  left: 300px;
+  animation: twinkle 3s infinite;
+}
+@keyframes twinkle {
+  0% {
+    /* width: 3px;
+    hieght: 3px; */
+    transform: scale(1);
+    box-shadow: 0 0 10px 2px #fff;
+  }
+  50% {
+    opacity: 0;
+    /* width: 0px;
+    height: 0px; */
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    /* width: 3px; */
+    /* height: 3px; */
+    transform: scale(1);
+    box-shadow: 0 0 20px 2px #fff;
+  }
+}
+.medStar {
+  border-radius: 50%;
+  height: 2px;
+  width: 2px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1);
+  top: 30px;
+  left: 300px;
+  animation: twinkle 2s infinite;
+}
+.smStar {
+  border-radius: 50%;
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1);
+  top: 40px;
+  left: 300px;
+  animation: twinkle 1s infinite;
+}
+.moon {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  background-color: transparent;
+  top: 80px;
+  animation: moon 20s linear infinite;
+}
+.moondiv {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 1);
+  top: 80px;
+  animation: moondiv 20s linear infinite;
+  animation-fill-mode: forwards;
+}
+@keyframes moon {
+  0% {
+    transform: translateX(calc(0vw - 100px)) translateY(150px) scale(1)
+      rotateZ(0deg);
+  }
+  45% {
+    transform: translateX(45vw) translateY(50px) scale(0.65) rotateZ(160deg);
+  }
+  55% {
+    transform: translateX(55vw) translateY(55px) scale(0.65) rotateZ(200deg);
+  }
+
+  100% {
+    transform: translateX(calc(100vw - 100px)) translateY(150px) scale(1)
+      rotateZ(360deg);
+  }
+}
+@keyframes moondiv {
+  0% {
+    transform: translateX(calc(0vw)) translateY(150px) scale(1);
+  }
+  50% {
+    transform: translateX(calc(50vw)) translateY(45px) scale(0.7);
+  }
+  /* 93% {
+    opacity: 1;
+    transform: translateX(calc(93.5vw)) translateY(148px) scale(0.9);
+  }
+  94% {
+    opacity: 0;
+    /* transform: translateX(calc(90vw)) translateY(150px) scale(1); 
+  } */
+  100% {
+    opacity: 1;
+    transform: translateX(calc(100vw - 188px)) translateY(150px) scale(1);
+  }
+}
+.backbtn {
+  position: absolute;
+  left: 48%;
+  top: 2%;
+  z-index: 1;
+}
+.achTitle {
+  position: absolute;
+  left: 42%;
+  top: 8%;
+  z-index: 1;
+  color: white;
+}
+.cloud {
+  position: absolute;
+  opacity: 0.5;
+  width: 20%;
+}
+.cl3 {
+  opacity: 0.2;
+  top: 0%;
+  transform: rotateZ(90deg);
+  left: -40%;
+  animation: cloud 40s linear infinite;
+}
+.cl2 {
+  top: 40%;
+  left: -30%;
+  animation: cloud 20s linear infinite;
+}
+.cl1 {
+  top: 50%;
+  left: 0%;
+  animation: cloud 30s linear infinite;
+}
+@keyframes cloud {
+  0% {
+    transform: translateX(calc(0vw - 100%));
+  }
+  50% {
+    transform: translateX(calc(50vw - 50%)) scale(1.7);
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100vw));
+  }
+}
+.achieve {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+  z-index: 3;
+  color: wheat;
+  height: 10%;
 }

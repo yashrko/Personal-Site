@@ -1,11 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 
-export default function Intro({ reset }) {
-  const introString = 'Hello, my name is yash'
+export default function Intro({ reset, introString }) {
   const [introWords, setIntroWords] = useState(0)
   const checkIntroLen = (curlen) => {
-    if (curlen > introString.length) {
+    if (curlen >= introString.length) {
       reset((val) => !val)
       return introString.length
     } else return curlen

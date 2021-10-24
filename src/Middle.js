@@ -47,7 +47,7 @@ export default function Middle() {
 
       {toplink ? (
         <div className='col-sm-8 flex-shrink-1 ms-5'>
-          <div className='row'>
+          <div className='row mar-right'>
             {expData.map((data) => (
               <ExpCard {...data} key={data.id} />
             ))}
@@ -57,10 +57,10 @@ export default function Middle() {
         <div className='col-sm-8 flex-shrink-1 ms-5'>
           <div
             id='carouselExampleIndicators'
-            className='carousel slide'
+            className='carousel slide mar-right'
             data-bs-ride='carousel'
           >
-            <div className='carousel-indicators'>
+            <div className='carousel-indicators '>
               {eduData.map((edata, index) => {
                 if (active === index + 1)
                   return (

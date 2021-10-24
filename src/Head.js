@@ -3,6 +3,7 @@ import Intro from './Intro'
 import IntroPara from './IntroPara'
 import { useEffect, useState } from 'react'
 import hackimg from './images/hackmasksmall.jpg'
+import { Link } from 'react-router-dom'
 
 export default function Head() {
   const eye1 = useRef(null)
@@ -88,6 +89,46 @@ export default function Head() {
         <h1>Loading</h1>
         <h2 className='hackwatch'>I'm watching everything</h2>
       </div>
+      <div className='navbar-outer'>
+        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+          <div className='container-fluid'>
+            <button
+              className='navbar-toggler'
+              type='button'
+              data-bs-toggle='collapse'
+              data-bs-target='#navbarNav'
+              aria-controls='navbarNav'
+              aria-expanded='false'
+              aria-label='Toggle navigation'
+            >
+              <span className='navbar-toggler-icon'></span>
+            </button>
+            <div className='collapse navbar-collapse' id='navbarNav'>
+              <ul className='navbar-nav'>
+                <li className='nav-item'>
+                  <Link
+                    className='nav-link '
+                    aria-current='page'
+                    to='/Personal-Site'
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link className='nav-link' to='/skills'>
+                    Skills
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link className='nav-link' to='Other'>
+                    Others
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
       <div className='container-fluid ps-0 pe-0 headOuter'>
         <div className='row intro-row'>
           <div className='introOuter pe-0'>
@@ -96,7 +137,10 @@ export default function Head() {
                 {isIntro ? (
                   <span className='blink'>|</span>
                 ) : (
-                  <Intro reset={setreset} />
+                  <Intro
+                    reset={setreset}
+                    introString='Hello, my name is yash'
+                  />
                 )}
               </h2>
               <h6 className='ms-5 mt-5 colPara'>
