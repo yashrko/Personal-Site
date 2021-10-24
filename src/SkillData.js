@@ -5,6 +5,8 @@ import javaimg from './images/java.png'
 import htmlimg from './images/html.png'
 import jsimg from './images/javascript.png'
 import reactimg from './images/react.png'
+import svnimg from './images/svn.png'
+
 const skillData = [
   {
     id: 1,
@@ -98,8 +100,7 @@ const skillData = [
   },
   {
     id: 18,
-    urlimg:
-      'https://lh3.googleusercontent.com/proxy/bRq8-1CpJTvWCEf6cTuB9AcpJsII-bAJSm15cp99QanpqxLbV9MePlgNiMeIyBoqaT1eNkcMfSohJmDg10AUFPPuEyCovQaepUk',
+    urlimg: svnimg,
     tech: 'SVN',
   },
 ]
