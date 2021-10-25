@@ -10,6 +10,9 @@ function App() {
         <Route exact path='/Other'>
           <Other />
         </Route>
+        <Route exact path='/Personal-Site/Other'>
+          <Other />
+        </Route>
         <Head />
       </Switch>
       <Route exact path='/Personal-Site'>
