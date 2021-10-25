@@ -161,6 +161,9 @@ code {
   .shadow {
     display: none !important;
   }
+  .achTitle {
+    font-size: 3vw;
+  }
 }
 .eye1 {
   position: absolute;
