@@ -17,7 +17,7 @@ export default function Other() {
   const [idachdata, setidachdata] = useState(0)
   let starslist = []
   let makelist = () => {
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 80; i++) {
       starslist[i] = [
         i,
         Math.floor(Math.random() * 100),
@@ -55,14 +55,16 @@ export default function Other() {
       </Link>
       <h4 className='achTitle'>Achievements/Courses</h4>
       {starslist.map((star, index) => {
-        if (index < 51) return <BigStar key={star[0]} pos={star} />
+        if (index < starslist.length / 3)
+          return <BigStar key={star[0]} pos={star} />
       })}
       {starslist.map((star, index) => {
-        if (index > 50 && index < 101)
+        if (index > starslist.length / 3 && index < starslist.length / 2)
           return <MedStar key={star[0]} pos={star} />
       })}
       {starslist.map((star, index) => {
-        if (index > 100) return <SmallStar key={star[0]} pos={star} />
+        if (index > starslist.length / 2)
+          return <SmallStar key={star[0]} pos={star} />
       })}
       <img src={moon} className='moon'></img>
       <div className='moondiv'></div>
