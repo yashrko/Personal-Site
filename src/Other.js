@@ -17,7 +17,7 @@ export default function Other() {
   const [idachdata, setidachdata] = useState(0)
   let starslist = []
   let makelist = () => {
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 60; i++) {
       starslist[i] = [
         i,
         Math.floor(Math.random() * 100),
