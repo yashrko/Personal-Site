@@ -16,7 +16,7 @@ export default function Middle() {
     else return val
   }
   return (
-    <div className='row mt-5'>
+    <div className='row mt-5 me-0'>
       <div className='col-sm-3 flex-column flex-shrink-0 p-3 bg-light sidebar'>
         <span className='d-flex align-items-center mb-3 mb-md-4 me-md-auto link-dark text-decoration-none'>
           <span className='fs-4 sidebarspan'>Sidebar</span>

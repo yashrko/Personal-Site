@@ -130,7 +130,7 @@ export default function Head() {
         </nav>
       </div>
       <div className='container-fluid ps-0 pe-0 headOuter'>
-        <div className='row intro-row'>
+        <div className='row intro-row me-0'>
           <div className='introOuter pe-0'>
             <div className='intro'>
               <h2 className='ms-5 camelcase colWhite'>
