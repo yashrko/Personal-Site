@@ -69,7 +69,7 @@ export default function Middle() {
         <div className='col-sm-8 flex-shrink-1 ms-5'>
           <div
             id='carouselExampleIndicators'
-            className='carousel slide mar-right'
+            className='carousel slide mar-right mt-3'
             data-bs-ride='carousel'
           >
             <div className='carousel-indicators '>

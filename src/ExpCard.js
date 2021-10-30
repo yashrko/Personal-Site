@@ -11,7 +11,7 @@ export default function ExpCard({
 }) {
   const { darkmode } = useContext(MyContext)
   return (
-    <div className='col-sm-4'>
+    <div className='col-sm-4 mt-3'>
       <div className={'card ' + (darkmode ? 'bg-dark' : 'light-mode')}>
         <img
           src={urlimg}
