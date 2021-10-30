@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import MyContext from './MyContext'
 
 export default function ExpCard({
   company,
@@ -8,9 +9,10 @@ export default function ExpCard({
   url,
   urlimg,
 }) {
+  const { darkmode } = useContext(MyContext)
   return (
-    <div className='col-sm-6'>
-      <div className='card'>
+    <div className='col-sm-4'>
+      <div className={'card ' + (darkmode ? 'bg-dark' : 'light-mode')}>
         <img
           src={urlimg}
           className='card-img-top'
@@ -22,7 +24,11 @@ export default function ExpCard({
           <h6 className='card-subtitle mb-2 text-muted'>
             {time + ' ' + timein}
           </h6>
-          <p className='card-text'>{content}</p>
+          <p
+            className={'card-text ' + (!darkmode ? 'text-dark' : 'text-light')}
+          >
+            {content}
+          </p>
           <a href={url} className='btn btn-primary'>
             Site
           </a>

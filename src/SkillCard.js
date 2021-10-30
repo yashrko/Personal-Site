@@ -1,8 +1,10 @@
 import React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
+import MyContext from './MyContext'
 
 export default function SkillCard({ id, urlimg, tech, randxid, randzid }) {
   const flipcardref = useRef(null)
+  const { darkmode } = useContext(MyContext)
 
   const getflipclass = () => {
     let retclass = ''
@@ -22,7 +24,7 @@ export default function SkillCard({ id, urlimg, tech, randxid, randzid }) {
         </div>
       </div>
       <div className='shadow'></div>
-      <h4>{tech}</h4>
+      <h4 className={darkmode ? 'text-light' : 'tex-dark'}>{tech}</h4>
     </div>
   )
 }

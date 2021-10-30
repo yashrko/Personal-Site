@@ -3,9 +3,14 @@ import { useEffect, useState } from 'react'
 
 export default function Intro({ reset, introString }) {
   const [introWords, setIntroWords] = useState(0)
+  //const [introreset, setintroreset] = useState(false)
   const checkIntroLen = (curlen) => {
     if (curlen >= introString.length) {
-      reset((val) => !val)
+      reset((val) => {
+        //console.log(val)
+        return !val
+      })
+      //setintroreset(!introreset)
       return introString.length
     } else return curlen
   }
@@ -17,6 +22,9 @@ export default function Intro({ reset, introString }) {
       clearTimeout(introtimeout)
     }
   }, [introWords])
+  useEffect(() => {
+    setIntroWords(0)
+  }, [introString])
   return (
     <>
       {introWords < introString.length ? (

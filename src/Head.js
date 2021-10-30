@@ -1,15 +1,17 @@
 import React, { useRef } from 'react'
 import Intro from './Intro'
 import IntroPara from './IntroPara'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import hackimg from './images/hackmasksmall.jpg'
 import { Link } from 'react-router-dom'
+import MyContext from './MyContext'
 
 export default function Head() {
   const eye1 = useRef(null)
   const eye2 = useRef(null)
   const [isIntro, setisIntro] = useState(true)
   const [reset, setreset] = useState(false)
+  const { setdarkmode, darkmode } = useContext(MyContext)
   useEffect(() => {
     const introinterval = setTimeout(() => {
       setisIntro((val) => !val)
@@ -27,56 +29,60 @@ export default function Head() {
       clearTimeout(resetinterval)
     }
   }, [reset])
+
   const handleMouseMove = (e) => {
-    const eye1rect = eye1.current.getBoundingClientRect()
-    const eye2rect = eye2.current.getBoundingClientRect()
-    const totaly = e.pageY - eye1rect.y
-    const totalx = e.pageX - eye1rect.x
-    const totaly2 = e.pageY - eye2rect.y
-    const totalx2 = e.pageX - eye2rect.x
-    const slope = totaly / totalx
-    const slope2 = totaly2 / totalx2
-    const y = Math.abs(1 * slope)
-    const yper = y / (y + 1)
-    const xper = 1 - yper
-    const y2 = Math.abs(1 * slope2)
-    const yper2 = y2 / (y2 + 1)
-    const xper2 = 1 - yper2
-    if (totalx > 0) {
-      if (totaly > 0) {
-        eye1.current.style.left = 35 + 4 * parseFloat(xper) + '%'
-        eye1.current.style.top = 40 + 1.2 * parseFloat(yper) + '%'
+    try {
+      const eye1rect = eye1.current.getBoundingClientRect()
+      const eye2rect = eye2.current.getBoundingClientRect()
+      const totaly = e.pageY - eye1rect.y
+      const totalx = e.pageX - eye1rect.x
+      const totaly2 = e.pageY - eye2rect.y
+      const totalx2 = e.pageX - eye2rect.x
+      const slope = totaly / totalx
+      const slope2 = totaly2 / totalx2
+      const y = Math.abs(1 * slope)
+      const yper = y / (y + 1)
+      const xper = 1 - yper
+      const y2 = Math.abs(1 * slope2)
+      const yper2 = y2 / (y2 + 1)
+      const xper2 = 1 - yper2
+      if (totalx > 0) {
+        if (totaly > 0) {
+          eye1.current.style.left = 35 + 4 * parseFloat(xper) + '%'
+          eye1.current.style.top = 40 + 1.2 * parseFloat(yper) + '%'
+        } else {
+          eye1.current.style.left = 35 + 4 * parseFloat(xper) + '%'
+          eye1.current.style.top = 40 - 1.2 * parseFloat(yper) + '%'
+        }
       } else {
-        eye1.current.style.left = 35 + 4 * parseFloat(xper) + '%'
-        eye1.current.style.top = 40 - 1.2 * parseFloat(yper) + '%'
+        if (totaly > 0) {
+          eye1.current.style.left = 35 - 4 * parseFloat(xper) + '%'
+          eye1.current.style.top = 40 + 1.2 * parseFloat(yper) + '%'
+        } else {
+          eye1.current.style.left = 35 - 4 * parseFloat(xper) + '%'
+          eye1.current.style.top = 40 - 1.2 * parseFloat(yper) + '%'
+        }
       }
-    } else {
-      if (totaly > 0) {
-        eye1.current.style.left = 35 - 4 * parseFloat(xper) + '%'
-        eye1.current.style.top = 40 + 1.2 * parseFloat(yper) + '%'
+      if (totalx2 > 0) {
+        if (totaly2 > 0) {
+          eye2.current.style.left = 60 + 4 * parseFloat(xper2) + '%'
+          eye2.current.style.top = 40 + 1.2 * parseFloat(yper2) + '%'
+        } else {
+          eye2.current.style.left = 60 + 4 * parseFloat(xper2) + '%'
+          eye2.current.style.top = 40 - 1.2 * parseFloat(yper2) + '%'
+        }
       } else {
-        eye1.current.style.left = 35 - 4 * parseFloat(xper) + '%'
-        eye1.current.style.top = 40 - 1.2 * parseFloat(yper) + '%'
+        if (totaly2 > 0) {
+          eye2.current.style.left = 60 - 4 * parseFloat(xper2) + '%'
+          eye2.current.style.top = 40 + 1.2 * parseFloat(yper2) + '%'
+        } else {
+          eye2.current.style.left = 60 - 4 * parseFloat(xper2) + '%'
+          eye2.current.style.top = 40 - 1.2 * parseFloat(yper2) + '%'
+        }
       }
-    }
-    if (totalx2 > 0) {
-      if (totaly2 > 0) {
-        eye2.current.style.left = 60 + 4 * parseFloat(xper2) + '%'
-        eye2.current.style.top = 40 + 1.2 * parseFloat(yper2) + '%'
-      } else {
-        eye2.current.style.left = 60 + 4 * parseFloat(xper2) + '%'
-        eye2.current.style.top = 40 - 1.2 * parseFloat(yper2) + '%'
-      }
-    } else {
-      if (totaly2 > 0) {
-        eye2.current.style.left = 60 - 4 * parseFloat(xper2) + '%'
-        eye2.current.style.top = 40 + 1.2 * parseFloat(yper2) + '%'
-      } else {
-        eye2.current.style.left = 60 - 4 * parseFloat(xper2) + '%'
-        eye2.current.style.top = 40 - 1.2 * parseFloat(yper2) + '%'
-      }
-    }
+    } catch {}
   }
+
   useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove)
     return () => {
@@ -119,10 +125,41 @@ export default function Head() {
                     Skills
                   </Link>
                 </li>
-                <li className='nav-item'>
-                  <Link className='nav-link' to='Other'>
+                <li className='nav-item dropdown'>
+                  <a
+                    className='nav-link dropdown-toggle'
+                    href='#'
+                    id='navbarDarkDropdownMenuLink'
+                    role='button'
+                    data-bs-toggle='dropdown'
+                    aria-expanded='false'
+                  >
                     Others
-                  </Link>
+                  </a>
+                  <ul
+                    className={
+                      darkmode
+                        ? 'dropdown-menu dropdown-menu-dark'
+                        : 'dropdown-menu dropdown-menu-light'
+                    }
+                    aria-labelledby='navbarDarkDropdownMenuLink'
+                  >
+                    <li>
+                      <Link className='dropdown-item' to='Other'>
+                        Courses/Achievements
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        className='dropdown-item'
+                        onClick={() => {
+                          setdarkmode(!darkmode)
+                        }}
+                      >
+                        {darkmode ? 'Light Mode' : 'Dark Mode'}
+                      </button>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -149,7 +186,9 @@ export default function Head() {
             </div>
           </div>
           <div className='imgintro ps-0 pe-0'>
-            <div className='imgouter hackload'>
+            <div
+              className={'imgouter hackload ' + (darkmode ? 'opac8' : 'opac5')}
+            >
               <img src={hackimg} alt={'alternate'} height='100%' width='100%' />
               <div className='eye1' ref={eye1}></div>
               <div className='eye2' ref={eye2}></div>

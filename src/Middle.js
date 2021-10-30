@@ -4,21 +4,33 @@ import ExpCard from './ExpCard'
 import EduCardBtn from './EduCardBtn'
 import EduCard from './EduCard'
 import eduData from './eduData'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import hackmask from './images/topkey.jpg'
+import MyContext from './MyContext'
 
 export default function Middle() {
   const [toplink, settoplink] = useState(true)
   const [active, setactive] = useState(1)
+  const { darkmode } = useContext(MyContext)
   const handleslide = (val) => {
     if (val === 0) return eduData.length
     if (val > eduData.length) return 1
     else return val
   }
   return (
-    <div className='row mt-5 me-0'>
-      <div className='col-sm-3 flex-column flex-shrink-0 p-3 bg-light sidebar'>
-        <span className='d-flex align-items-center mb-3 mb-md-4 me-md-auto link-dark text-decoration-none'>
+    <div className='row mt-4 me-0'>
+      <div
+        className={
+          'col-sm-3 flex-column flex-shrink-0 p-3 sidebar ' +
+          (darkmode ? 'bg-dark' : 'bg-light')
+        }
+      >
+        <span
+          className={
+            'd-flex align-items-center mb-3 mb-md-4 me-md-auto text-decoration-none ' +
+            (!darkmode ? 'link-dark' : 'link-light')
+          }
+        >
           <span className='fs-4 sidebarspan'>Sidebar</span>
         </span>
         <ul className='nav nav-pills flex-column mb-auto'>
