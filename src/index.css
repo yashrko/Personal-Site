@@ -425,7 +425,7 @@ code {
 }
 .night {
   width: 100%;
-  height: 45.1rem;
+  height: 100vh;
   background: rgba(0, 0, 0, 1);
   perspective: 20rem;
   overflow: hidden;
